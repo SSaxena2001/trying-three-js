@@ -13,6 +13,7 @@ function Box(props: MeshProps) {
 			{...props}
 			ref={meshRef}
 			scale={active ? 1.5 : 1}
+			castShadow
 			onClick={event => setActive(!active)}
 			onPointerOver={event => setHover(true)}
 			onPointerOut={event => setHover(false)}
@@ -28,8 +29,13 @@ type Props = Record<string, unknown>
 const Scene = (props: Props) => {
 	return (
 		<>
-			<ambientLight />
-			<pointLight position={[10, 10, 10]} castShadow />
+			<ambientLight intensity={0.6} />
+			<pointLight
+				position={[10, 10, 10]}
+				castShadow
+				shadow-mapSize-width={2048}
+				shadow-mapSize-height={2048}
+			/>
 			<Box position={[-1.2, 0, 0]} />
 			<Box position={[1.2, 0, 0]} />
 		</>
